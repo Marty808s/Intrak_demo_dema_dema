@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upravit studenta - {{ student.jmeno }} {{ student.prijmeni }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">Upravit studenta: {{ student.jmeno }} {{ student.prijmeni }}</h1>
+        <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="return validateForm()">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="jmeno">Jméno:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="jmeno" name="jmeno" type="text" value="{{ student.jmeno }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="prijmeni">Příjmení:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="prijmeni" name="prijmeni" type="text" value="{{ student.prijmeni }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="datum_narozeni">Datum narození:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="datum_narozeni" name="datum_narozeni" type="date" value="{{ student.datum_narozeni }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="pokoj">Pokoj:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pokoj" name="pokoj" type="text" value="{{ student.pokoj }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="patro">Patro:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="patro" name="patro" type="text" value="{{ student.patro }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" value="{{ student.email }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="telefon">Telefon:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telefon" name="telefon" type="tel" value="{{ student.telefon }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="skola">Škola:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="skola" name="skola" type="text" value="{{ student.skola }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="rocnik">Ročník:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rocnik" name="rocnik" type="number" value="{{ student.rocnik }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="obor">Obor:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="obor" name="obor" type="text" value="{{ student.obor }}" required>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Kontakt na rodiče</h2>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="matka_jmeno">Jméno matky:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="matka_jmeno" name="matka_jmeno" type="text" value="{{ student.matka.jmeno }}">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="matka_telefon">Telefon matky:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="matka_telefon" name="matka_telefon" type="tel" value="{{ student.matka.telefon }}">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="matka_email">Email matky:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="matka_email" name="matka_email" type="email" value="{{ student.matka.email }}">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="otec_jmeno">Jméno otce:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="otec_jmeno" name="otec_jmeno" type="text" value="{{ student.otec.jmeno }}">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="otec_telefon">Telefon otce:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="otec_telefon" name="otec_telefon" type="tel" value="{{ student.otec.telefon }}">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="otec_email">Email otce:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="otec_email" name="otec_email" type="email" value="{{ student.otec.email }}">
+            </div>
+
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Uložit změny
+                </button>
+                <div class="flex items-center gap-4">
+                    <a href="{{ url_for('student_card', id=student.id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Karta studenta
+                    </a>
+                    <a href="/" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Zpět na hlavní stránku
+                    </a>
+                </div>
+
+  
+            </div>
+        </form>
+
+        <!-- Přidáno: Tlačítko pro odstranění studenta -->
+        <div class="mt-6">
+            <button onclick="confirmDelete()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Odstranit studenta
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Zde můžete přidat validaci formuláře před odesláním
+            // Například kontrola formátu telefonních čísel, emailů atd.
+            // Vraťte false, pokud validace selže, jinak true
+            return true;
+        }
+
+        // Upraveno: Funkce pro potvrzení odstranění studenta
+        function confirmDelete() {
+            if (confirm("Opravdu chcete odstranit tohoto studenta? Tato akce je nevratná.")) {
+                // Vytvoříme a odešleme POST požadavek na odstranění studenta
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{{ url_for('edit_student', id=student.id) }}";
+                
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+                form.appendChild(methodInput);
+                
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
+</body>
+</html>

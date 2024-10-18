@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karta studenta - {{ student.jmeno }} {{ student.prijmeni }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ student.jmeno }} {{ student.prijmeni }}</h1>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <p class="mb-2"><strong class="font-bold">ID:</strong> {{ student.id }}</p>
+            <p class="mb-2"><strong class="font-bold">Jméno:</strong> {{ student.jmeno }} {{ student.prijmeni }}</p>
+            <p class="mb-2"><strong class="font-bold">Datum narození:</strong> {{ student.datum_narozeni }}</p>
+            <p class="mb-2"><strong class="font-bold">Patro:</strong> {{ student.patro }}</p>
+            <p class="mb-2"><strong class="font-bold">Email:</strong> {{ student.email }}</p>
+            <p class="mb-2"><strong class="font-bold">Škola:</strong> {{ student.skola }}</p>
+            <p class="mb-2"><strong class="font-bold">Ročník:</strong> {{ student.rocnik }}</p>
+            <p class="mb-2"><strong class="font-bold">Obor:</strong> {{ student.obor }}</p>
+            
+            <h2 class="text-2xl font-bold mt-6 mb-4 text-gray-800">Kontakty rodičů:</h2>
+            <div class="mb-4">
+                <h3 class="text-xl font-bold mb-2 text-gray-700">Matka:</h3>
+                <p class="mb-1">{{ student.matka.jmeno }}</p>
+                <p class="mb-1">Tel: {{ student.matka.telefon }}</p>
+                <p class="mb-1">Email: {{ student.matka.email }}</p>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-2 text-gray-700">Otec:</h3>
+                <p class="mb-1">{{ student.otec.jmeno }}</p>
+                <p class="mb-1">Tel: {{ student.otec.telefon }}</p>
+                <p class="mb-1">Email: {{ student.otec.email }}</p>
+            </div>
+            
+            <div class="flex flex-wrap gap-4 mt-6">
+                <a href="{{ url_for('edit_student', id=student.id) }}" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Upravit studenta</a>
+                <a href="{{ url_for('generate_pdf', id=student.id) }}" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Stáhnout PDF</a>
+                <a href="{{ url_for('index') }}" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Zpět na seznam studentů</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
