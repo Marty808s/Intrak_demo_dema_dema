@@ -24,12 +24,154 @@ app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(24)
 
 # Slovník pro ukládání studentů s rozšířenými informacemi
 students = {
+    # ... existing students ...
+    6: {
+        'id': 6,
+        'jmeno': 'Karolína',
+        'prijmeni': 'Veselá',
+        'datum_narozeni': '2002-09-18',
+        'patro': 4,
+        'pokoj': '4B',
+        'matka': {'jmeno': 'Monika Veselá', 'telefon': '777111222', 'email': 'monika@example.com'},
+        'otec': {'jmeno': 'Radek Veselý', 'telefon': '777333444', 'email': 'radek@example.com'},
+        'email': 'karolina.vesela@student.cz',
+        'skola': 'Gymnázium Praha',
+        'rocnik': 3,
+        'obor': 'Všeobecné gymnázium'
+    },
+    7: {
+        'id': 7,
+        'jmeno': 'Martin',
+        'prijmeni': 'Kučera',
+        'datum_narozeni': '2001-04-30',
+        'patro': 2,
+        'pokoj': '2A',
+        'matka': {'jmeno': 'Jitka Kučerová', 'telefon': '608123456', 'email': 'jitka@example.com'},
+        'otec': {'jmeno': 'Tomáš Kučera', 'telefon': '608654321', 'email': 'tomas@example.com'},
+        'email': 'martin.kucera@student.cz',
+        'skola': 'SPŠ elektrotechnická',
+        'rocnik': 4,
+        'obor': 'Informační technologie'
+    },
+    8: {
+        'id': 8,
+        'jmeno': 'Tereza',
+        'prijmeni': 'Marková',
+        'datum_narozeni': '2003-12-05',
+        'patro': 3,
+        'pokoj': '3C',
+        'matka': {'jmeno': 'Alena Marková', 'telefon': '602111222', 'email': 'alena@example.com'},
+        'otec': {'jmeno': 'Petr Marek', 'telefon': '602333444', 'email': 'petr.m@example.com'},
+        'email': 'tereza.markova@student.cz',
+        'skola': 'Obchodní akademie',
+        'rocnik': 2,
+        'obor': 'Ekonomika a podnikání'
+    },
+    9: {
+        'id': 9,
+        'jmeno': 'David',
+        'prijmeni': 'Novotný',
+        'datum_narozeni': '2000-08-12',
+        'patro': 1,
+        'pokoj': '1A',
+        'matka': {'jmeno': 'Ivana Novotná', 'telefon': '773999888', 'email': 'ivana@example.com'},
+        'otec': {'jmeno': 'Marek Novotný', 'telefon': '773888999', 'email': 'marek@example.com'},
+        'email': 'david.novotny@student.cz',
+        'skola': 'Střední průmyslová škola',
+        'rocnik': 4,
+        'obor': 'Strojírenství'
+    },
+    10: {
+        'id': 10,
+        'jmeno': 'Nikola',
+        'prijmeni': 'Králová',
+        'datum_narozeni': '2002-06-25',
+        'patro': 5,
+        'pokoj': '5A',
+        'matka': {'jmeno': 'Zuzana Králová', 'telefon': '606777888', 'email': 'zuzana@example.com'},
+        'otec': {'jmeno': 'Lukáš Král', 'telefon': '606888999', 'email': 'lukas@example.com'},
+        'email': 'nikola.kralova@student.cz',
+        'skola': 'Střední zdravotnická škola',
+        'rocnik': 3,
+        'obor': 'Praktická sestra'
+    },
+    11: {
+        'id': 11,
+        'jmeno': 'Filip',
+        'prijmeni': 'Horák',
+        'datum_narozeni': '2001-11-08',
+        'patro': 2,
+        'pokoj': '2B',
+        'matka': {'jmeno': 'Markéta Horáková', 'telefon': '775123456', 'email': 'marketa@example.com'},
+        'otec': {'jmeno': 'Ondřej Horák', 'telefon': '775654321', 'email': 'ondrej@example.com'},
+        'email': 'filip.horak@student.cz',
+        'skola': 'Gymnázium Praha',
+        'rocnik': 4,
+        'obor': 'Všeobecné gymnázium'
+    },
+    12: {
+        'id': 12,
+        'jmeno': 'Adéla',
+        'prijmeni': 'Sedláčková',
+        'datum_narozeni': '2003-02-14',
+        'patro': 4,
+        'pokoj': '4C',
+        'matka': {'jmeno': 'Lucie Sedláčková', 'telefon': '604111222', 'email': 'lucie@example.com'},
+        'otec': {'jmeno': 'Jan Sedláček', 'telefon': '604333444', 'email': 'jan.s@example.com'},
+        'email': 'adela.sedlackova@student.cz',
+        'skola': 'SPŠ elektrotechnická',
+        'rocnik': 2,
+        'obor': 'Elektrotechnika'
+    },
+    13: {
+        'id': 13,
+        'jmeno': 'Vojtěch',
+        'prijmeni': 'Malý',
+        'datum_narozeni': '2000-10-03',
+        'patro': 3,
+        'pokoj': '3B',
+        'matka': {'jmeno': 'Kateřina Malá', 'telefon': '777555666', 'email': 'katerina@example.com'},
+        'otec': {'jmeno': 'Martin Malý', 'telefon': '777666555', 'email': 'martin.m@example.com'},
+        'email': 'vojtech.maly@student.cz',
+        'skola': 'Střední průmyslová škola',
+        'rocnik': 4,
+        'obor': 'Informační technologie'
+    },
+    14: {
+        'id': 14,
+        'jmeno': 'Barbora',
+        'prijmeni': 'Kolářová',
+        'datum_narozeni': '2002-07-19',
+        'patro': 5,
+        'pokoj': '5C',
+        'matka': {'jmeno': 'Simona Kolářová', 'telefon': '608987654', 'email': 'simona@example.com'},
+        'otec': {'jmeno': 'Jakub Kolář', 'telefon': '608456789', 'email': 'jakub.k@example.com'},
+        'email': 'barbora.kolarova@student.cz',
+        'skola': 'Obchodní akademie',
+        'rocnik': 3,
+        'obor': 'Ekonomické lyceum'
+    },
+    15: {
+        'id': 15,
+        'jmeno': 'Matěj',
+        'prijmeni': 'Pospíšil',
+        'datum_narozeni': '2001-01-27',
+        'patro': 1,
+        'pokoj': '1C',
+        'matka': {'jmeno': 'Veronika Pospíšilová', 'telefon': '773222111', 'email': 'veronika@example.com'},
+        'otec': {'jmeno': 'David Pospíšil', 'telefon': '773111222', 'email': 'david.p@example.com'},
+        'email': 'matej.pospisil@student.cz',
+        'skola': 'Střední zdravotnická škola',
+        'rocnik': 4,
+        'obor': 'Zdravotnický asistent'
+    },
     1: {
         'id': 1,
         'jmeno': 'Jan',
         'prijmeni': 'Novák',
         'datum_narozeni': '2000-05-15',
-        'patro': '3A',
+        'patro': 3,
+        'pokoj': '3A',
         'matka': {'jmeno': 'Jana Nováková', 'telefon': '123456789', 'email': 'jana@example.com'},
         'otec': {'jmeno': 'Petr Novák', 'telefon': '987654321', 'email': 'petr@example.com'},
         'email': 'jan.novak@student.cz',
@@ -42,7 +184,7 @@ students = {
         'jmeno': 'Eva',
         'prijmeni': 'Svobodová',
         'datum_narozeni': '2001-08-20',
-        'patro': '5B',
+        'patro': 5,
         'matka': {'jmeno': 'Hana Svobodová', 'telefon': '111222333', 'email': 'hana@example.com'},
         'otec': {'jmeno': 'Jiří Svoboda', 'telefon': '444555666', 'email': 'jiri@example.com'},
         'email': 'eva.svobodova@student.cz',
@@ -55,7 +197,7 @@ students = {
         'jmeno': 'Tomáš',
         'prijmeni': 'Dvořák',
         'datum_narozeni': '2002-03-10',
-        'patro': '2C',
+        'patro': 2,
         'matka': {'jmeno': 'Martina Dvořáková', 'telefon': '777888999', 'email': 'martina@example.com'},
         'otec': {'jmeno': 'Karel Dvořák', 'telefon': '666555444', 'email': 'karel@example.com'},
         'email': 'tomas.dvorak@student.cz',
@@ -68,7 +210,7 @@ students = {
         'jmeno': 'Lucie',
         'prijmeni': 'Procházková',
         'datum_narozeni': '2000-11-05',
-        'patro': '4A',
+        'patro': 4,
         'matka': {'jmeno': 'Petra Procházková', 'telefon': '333222111', 'email': 'petra@example.com'},
         'otec': {'jmeno': 'Michal Procházka', 'telefon': '999888777', 'email': 'michal@example.com'},
         'email': 'lucie.prochazkova@student.cz',
@@ -81,7 +223,7 @@ students = {
         'jmeno': 'Jakub',
         'prijmeni': 'Černý',
         'datum_narozeni': '2003-07-22',
-        'patro': '1B',
+        'patro': 1,
         'matka': {'jmeno': 'Lenka Černá', 'telefon': '555444333', 'email': 'lenka@example.com'},
         'otec': {'jmeno': 'Pavel Černý', 'telefon': '222333444', 'email': 'pavel@example.com'},
         'email': 'jakub.cerny@student.cz',
@@ -272,15 +414,42 @@ def edit_student(id):
 @app.route('/search', methods=['GET'])
 def search_student():
     query = request.args.get('query', '').lower()
-    if query:
-        results = [
-            student for student in students.values()
-            if query in student['jmeno'].lower() or query in student['prijmeni'].lower()
-        ]
+    obor = request.args.get('obor', '').lower()
+    skola = request.args.get('skola', '').lower()
+    patro = request.args.get('patro', '')
+    pokoj = request.args.get('pokoj', '').lower()
+
+    # Debug: Print the type and content of students
+    print(f"Type of students: {type(students)}")
+    print(f"Content of students: {students}")
+
+    # Ensure students is a dictionary
+    if isinstance(students, dict):
+        student_list = list(students.values())
     else:
-        results = None
-    
-    return render_template('search_student.html', results=results)
+        student_list = students  # Assuming it's already a list
+
+    # Debug: Print a sample student
+    if student_list:
+        print(f"Sample student: {student_list[0]}")
+
+    # Safely get the 'skola' field
+    skoly = sorted(set(student.get('skola', '') for student in student_list if isinstance(student, dict)))
+
+    results = student_list
+
+    if query:
+        results = [s for s in results if isinstance(s, dict) and (query in s.get('jmeno', '').lower() or query in s.get('prijmeni', '').lower())]
+    if obor:
+        results = [s for s in results if isinstance(s, dict) and obor in s.get('obor', '').lower()]
+    if skola:
+        results = [s for s in results if isinstance(s, dict) and skola in s.get('skola', '').lower()]
+    if patro:
+        results = [s for s in results if isinstance(s, dict) and str(s.get('patro', '')) == patro]
+    if pokoj:
+        results = [s for s in results if isinstance(s, dict) and pokoj in str(s.get('pokoj', '')).lower()]
+
+    return render_template('search_student.html', results=results, skoly=skoly)
 
 if __name__ == '__main__':
     app.run(debug=True)
