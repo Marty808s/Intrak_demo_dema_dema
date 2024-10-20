@@ -382,25 +382,27 @@ def edit_student(id):
         else:
             # Aktualizace studenta
             try:
-                student.update({
-                    'jmeno': request.form.get('jmeno', student['jmeno']),
-                    'prijmeni': request.form.get('prijmeni', student['prijmeni']),
-                    'datum_narozeni': request.form.get('datum_narozeni', student['datum_narozeni']),
-                    'patro': request.form.get('patro', student['patro']),
+                students[id].update({
+                    'jmeno': request.form['jmeno'],
+                    'prijmeni': request.form['prijmeni'],
+                    'datum_narozeni': request.form['datum_narozeni'],
+                    'patro': request.form['patro'],
+                    'pokoj': request.form['pokoj'],
                     'matka': {
-                        'jmeno': request.form.get('matka_jmeno', student['matka']['jmeno']),
-                        'telefon': request.form.get('matka_telefon', student['matka']['telefon']),
-                        'email': request.form.get('matka_email', student['matka']['email'])
+                        'jmeno': request.form['matka_jmeno'],
+                        'telefon': request.form['matka_telefon'],
+                        'email': request.form['matka_email']
                     },
                     'otec': {
-                        'jmeno': request.form.get('otec_jmeno', student['otec']['jmeno']),
-                        'telefon': request.form.get('otec_telefon', student['otec']['telefon']),
-                        'email': request.form.get('otec_email', student['otec']['email'])
+                        'jmeno': request.form['otec_jmeno'],
+                        'telefon': request.form['otec_telefon'],
+                        'email': request.form['otec_email']
                     },
-                    'email': request.form.get('email', student['email']),
-                    'skola': request.form.get('skola', student['skola']),
-                    'rocnik': int(request.form.get('rocnik', student['rocnik'])),
-                    'obor': request.form.get('obor', student['obor'])
+                    'email': request.form['email'],
+                    'telefon': request.form['telefon'],
+                    'skola': request.form['skola'],
+                    'rocnik': int(request.form['rocnik']),
+                    'obor': request.form['obor']
                 })
                 flash('Údaje studenta byly úspěšně aktualizovány.', 'success')
             except KeyError as e:
@@ -450,6 +452,44 @@ def search_student():
         results = [s for s in results if isinstance(s, dict) and pokoj in str(s.get('pokoj', '')).lower()]
 
     return render_template('search_student.html', results=results, skoly=skoly)
+
+@app.route('/email_list', methods=['GET'])
+def email_list():
+    query = request.args.get('query', '').lower()
+    obor = request.args.get('obor', '').lower()
+    skola = request.args.get('skola', '').lower()
+    patro = request.args.get('patro', '')
+    pokoj = request.args.get('pokoj', '').lower()
+    email_type = request.args.get('email_type', 'student')
+
+    student_list = list(students.values())
+    skoly = sorted(set(student.get('skola', '') for student in student_list if isinstance(student, dict)))
+
+    results = student_list
+
+    if query:
+        results = [s for s in results if isinstance(s, dict) and (query in s.get('jmeno', '').lower() or query in s.get('prijmeni', '').lower())]
+    if obor:
+        results = [s for s in results if isinstance(s, dict) and obor in s.get('obor', '').lower()]
+    if skola:
+        results = [s for s in results if isinstance(s, dict) and skola in s.get('skola', '').lower()]
+    if patro:
+        results = [s for s in results if isinstance(s, dict) and str(s.get('patro', '')) == patro]
+    if pokoj:
+        results = [s for s in results if isinstance(s, dict) and pokoj in str(s.get('pokoj', '')).lower()]
+
+    if email_type == 'student':
+        emails = [s['email'] for s in results if 'email' in s]
+    elif email_type == 'matka':
+        emails = [s['matka']['email'] for s in results if 'matka' in s and 'email' in s['matka']]
+    elif email_type == 'otec':
+        emails = [s['otec']['email'] for s in results if 'otec' in s and 'email' in s['otec']]
+    else:
+        emails = []
+
+    email_list = '; '.join(emails)
+
+    return render_template('email_list.html', results=results, skoly=skoly, email_list=email_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

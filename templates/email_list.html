@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ url_for('index') }}" class="text-xl font-bold">Správa studentů</a>
+            <div class="flex items-center gap-4">
+                <a href="{{ url_for('search_student') }}" class="bg-white text-blue-600 hover:bg-blue-100 font-bold py-2 px-4 rounded">
+                    Hledat studenta
+                </a>
+                <a href="{{ url_for('email_list') }}" class="bg-white text-blue-600 hover:bg-blue-100 font-bold py-2 px-4 rounded">
+                    Emailový seznam
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="max-w-4xl mx-auto bg-gray-100 my-8 rounded-lg py-2">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Seznam e-mailů</h1>
+
+        <form method="GET" action="{{ url_for('email_list') }}" class="mb-8 bg-white shadow-md rounded px-8 pt-6 pb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="query" placeholder="Hledat jméno nebo příjmení" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="text" name="obor" placeholder="Obor" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <select name="skola" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">Vyberte školu</option>
+                    {% for skola in skoly %}
+                    <option value="{{ skola }}">{{ skola }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="patro" placeholder="Patro" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="text" name="pokoj" placeholder="Pokoj" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <select name="email_type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="student">E-mail studenta</option>
+                    <option value="matka">E-mail matky</option>
+                    <option value="otec">E-mail otce</option>
+                </select>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Filtrovat</button>
+            </div>
+        </form>
+
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Výsledky hledání</h2>
+            <p class="mb-2">Počet nalezených e-mailů: {{ email_list.count(';') + 1 if email_list else 0 }}</p>
+            <textarea rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" readonly>{{ email_list }}</textarea>
+        </div>
+
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Seznam studentů</h2>
+            <ul class="list-disc pl-5">
+            {% for student in results %}
+                <li class="mb-2">{{ student.jmeno }} {{ student.prijmeni }} - {{ student.skola }} - {{ student.obor }}</li>
+            {% endfor %}
+            </ul>
+            <a href="{{ url_for('index') }}" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Zpět na seznam studentů</a>
+        </div>
+    </div>
+</body>
+</html>
